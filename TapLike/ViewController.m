@@ -8,11 +8,13 @@
 
 #import "ViewController.h"
 #import "DMHeartFlyView.h"
+#import "FlyFlowersView.h"
 
 @interface ViewController ()
 
 @property (nonatomic, assign) CGFloat heartSize;
 @property (nonatomic, strong) NSTimer *burstTimer;
+@property (nonatomic, strong) UIDynamicAnimator *animator;
 
 @end
 
@@ -32,13 +34,35 @@
     [self.view addGestureRecognizer:longPressGesture];
 }
 
+
+#pragma mark - property
+
+- (UIDynamicAnimator *)animator
+{
+    if (!_animator) {
+        //创建物理仿真器（ReferenceView:参照视图，设置仿真范围）
+        _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    }
+    return _animator;
+}
+
+#pragma mark - method
+
 - (void)showTheLove
 {
-    DMHeartFlyView* heart = [[DMHeartFlyView alloc]initWithFrame:CGRectMake(0, 0, _heartSize, _heartSize)];
+    
+//    DMHeartFlyView* heart = [[DMHeartFlyView alloc]initWithFrame:CGRectMake(0, 0, _heartSize, _heartSize)];
+//    [self.view addSubview:heart];
+//    CGPoint fountainSource = CGPointMake(20 + _heartSize/2.0, self.view.bounds.size.height - _heartSize/2.0 - 10);
+//    heart.center = fountainSource;
+//    [heart animateInView:self.view];
+
+    FlyFlowersView *heart = [[FlyFlowersView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60.0,
+                                                                             self.view.frame.size.height - 60.0,
+                                                                             self.heartSize,
+                                                                             self.heartSize)];
     [self.view addSubview:heart];
-    CGPoint fountainSource = CGPointMake(20 + _heartSize/2.0, self.view.bounds.size.height - _heartSize/2.0 - 10);
-    heart.center = fountainSource;
-    [heart animateInView:self.view];
+    [heart startAnimateWithAnimator:self.animator];
 }
 
 - (void)longPressGesture:(UILongPressGestureRecognizer *)longPressGesture
