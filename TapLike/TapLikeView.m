@@ -14,7 +14,7 @@
 #define TapLikeWidth    19.0
 #define TapLikeHeight   18.0
 
-@interface TapLikeView ()
+@interface TapLikeView () <CAAnimationDelegate>
 
 @property (nonatomic, strong) UIView *tapLikeBgView;
 @property (nonatomic, strong) UIImageView *tapLikeImageView;
@@ -96,17 +96,32 @@
 
 - (void)tapGestureResponse
 {
+    // 添加动画
+    if (![self.tapLikeImageView.layer animationForKey:@"scale"]) {
+        [self addTapLikeAnimation];
+    }
+    
+    // 发起回调
     if (self.delegate && [self.delegate respondsToSelector:@selector(showTheLoveWithTap)]) {
         [self.delegate showTheLoveWithTap];
     }
 }
 
+- (void)addTapLikeAnimation
+{
+    CAKeyframeAnimation *scale = [CAKeyframeAnimation animationWithKeyPath:@"transform.scale"];
+    scale.values = @[@1, @1.25, @1];
+    scale.keyTimes = @[@0, @0.5, @1];
+    scale.duration = 1;
+    scale.repeatCount = 1;
+    scale.fillMode = kCAFillModeBoth;
+    scale.removedOnCompletion = NO;
+    scale.delegate = self;
+    [self.tapLikeImageView.layer addAnimation:scale forKey:@"scale"];
+}
+
 - (void)pressGestureResponse:(UILongPressGestureRecognizer *)longPressGesture
 {
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(showTheLoveWithPress)]) {
-//        [self.delegate showTheLoveWithPress];
-//    }
-    
     switch (longPressGesture.state) {
         case UIGestureRecognizerStateBegan:
             self.burstTimer = [NSTimer scheduledTimerWithTimeInterval:0.2
@@ -123,6 +138,17 @@
             break;
     }
 }
+
+#pragma mark - CAAnimationDelegate
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if ([anim isEqual:[self.tapLikeImageView.layer animationForKey:@"scale"]]) {
+        [self.tapLikeImageView.layer removeAnimationForKey:@"scale"];
+    }
+}
+
+
 
 
 @end
