@@ -7,35 +7,41 @@
 //
 
 #import "ViewController.h"
-#import "DMHeartFlyView.h"
 #import "FlyFlowersView.h"
+#import "TapLikeView.h"
 
-@interface ViewController ()
+#define FLOWERWIDTH 36.0
 
-@property (nonatomic, assign) CGFloat heartSize;
-@property (nonatomic, strong) NSTimer *burstTimer;
+@interface ViewController () <TapLikeViewDelegate>
 @property (nonatomic, strong) UIDynamicAnimator *animator;
+
+@property (nonatomic, strong) TapLikeView *tapLikeView;
 
 @end
 
-@implementation ViewController
+@implementation ViewController 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.heartSize = 36;
     self.view.backgroundColor = [UIColor lightGrayColor];
-    self.view.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showTheLove)];
-    [self.view addGestureRecognizer:tapGesture];
     
-    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                   action:@selector(longPressGesture:)];
-    longPressGesture.minimumPressDuration = 0.2;
-    [self.view addGestureRecognizer:longPressGesture];
+    [self.view addSubview:self.tapLikeView];
 }
 
 
 #pragma mark - property
+
+- (TapLikeView *)tapLikeView
+{
+    if (!_tapLikeView) {
+        _tapLikeView = [[TapLikeView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 80.0,
+                                                                    self.view.frame.size.height - 80.0,
+                                                                    60.0,
+                                                                    60.0)];
+        _tapLikeView.delegate = self;
+    }
+    return _tapLikeView;
+}
 
 - (UIDynamicAnimator *)animator
 {
@@ -46,42 +52,21 @@
     return _animator;
 }
 
-#pragma mark - method
+#pragma mark - TapLikeViewDelegate
 
-- (void)showTheLove
+- (void)showTheLoveWithTap
 {
-    
-//    DMHeartFlyView* heart = [[DMHeartFlyView alloc]initWithFrame:CGRectMake(0, 0, _heartSize, _heartSize)];
-//    [self.view addSubview:heart];
-//    CGPoint fountainSource = CGPointMake(20 + _heartSize/2.0, self.view.bounds.size.height - _heartSize/2.0 - 10);
-//    heart.center = fountainSource;
-//    [heart animateInView:self.view];
-
-    FlyFlowersView *heart = [[FlyFlowersView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - 60.0,
-                                                                             self.view.frame.size.height - 60.0,
-                                                                             self.heartSize,
-                                                                             self.heartSize)];
+    FlyFlowersView *heart = [[FlyFlowersView alloc] initWithFrame:CGRectMake(self.view.frame.size.width-50.0-FLOWERWIDTH/2.0,
+                                                                             self.view.frame.size.height-90.0-FLOWERWIDTH/2.0,
+                                                                             FLOWERWIDTH,
+                                                                             FLOWERWIDTH)];
     [self.view addSubview:heart];
     [heart startAnimateWithAnimator:self.animator];
 }
 
-- (void)longPressGesture:(UILongPressGestureRecognizer *)longPressGesture
+- (void)showTheLoveWithPress
 {
-    switch (longPressGesture.state) {
-        case UIGestureRecognizerStateBegan:
-            self.burstTimer = [NSTimer scheduledTimerWithTimeInterval:0.2
-                                                               target:self
-                                                             selector:@selector(showTheLove)
-                                                             userInfo:nil
-                                                              repeats:YES];
-            break;
-        case UIGestureRecognizerStateEnded:
-            [self.burstTimer invalidate];
-            self.burstTimer = nil;
-            break;
-        default:
-            break;
-    }
+    
 }
 
 @end

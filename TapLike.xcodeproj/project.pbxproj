@@ -13,8 +13,8 @@
 		A10C01221EA395F9008BDEB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10C01201EA395F9008BDEB0 /* Main.storyboard */; };
 		A10C01241EA395F9008BDEB0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10C01231EA395F9008BDEB0 /* Assets.xcassets */; };
 		A10C01271EA395F9008BDEB0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A10C01251EA395F9008BDEB0 /* LaunchScreen.storyboard */; };
-		A1FEA5121EA3B82500D6E5E5 /* DMHeartFlyView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FEA5111EA3B82500D6E5E5 /* DMHeartFlyView.m */; };
 		A1FEA5181EA4A27300D6E5E5 /* FlyFlowersView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FEA5171EA4A27300D6E5E5 /* FlyFlowersView.m */; };
+		A1FEA51B1EA4DF4D00D6E5E5 /* TapLikeView.m in Sources */ = {isa = PBXBuildFile; fileRef = A1FEA51A1EA4DF4D00D6E5E5 /* TapLikeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +28,10 @@
 		A10C01231EA395F9008BDEB0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10C01261EA395F9008BDEB0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10C01281EA395F9008BDEB0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A1FEA5101EA3B82500D6E5E5 /* DMHeartFlyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DMHeartFlyView.h; sourceTree = "<group>"; };
-		A1FEA5111EA3B82500D6E5E5 /* DMHeartFlyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DMHeartFlyView.m; sourceTree = "<group>"; };
 		A1FEA5161EA4A27300D6E5E5 /* FlyFlowersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlyFlowersView.h; sourceTree = "<group>"; };
 		A1FEA5171EA4A27300D6E5E5 /* FlyFlowersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlyFlowersView.m; sourceTree = "<group>"; };
+		A1FEA5191EA4DF4D00D6E5E5 /* TapLikeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapLikeView.h; sourceTree = "<group>"; };
+		A1FEA51A1EA4DF4D00D6E5E5 /* TapLikeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapLikeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +68,10 @@
 				A10C011B1EA395F9008BDEB0 /* AppDelegate.m */,
 				A10C011D1EA395F9008BDEB0 /* ViewController.h */,
 				A10C011E1EA395F9008BDEB0 /* ViewController.m */,
+				A1FEA5191EA4DF4D00D6E5E5 /* TapLikeView.h */,
+				A1FEA51A1EA4DF4D00D6E5E5 /* TapLikeView.m */,
 				A1FEA5161EA4A27300D6E5E5 /* FlyFlowersView.h */,
 				A1FEA5171EA4A27300D6E5E5 /* FlyFlowersView.m */,
-				A1FEA5101EA3B82500D6E5E5 /* DMHeartFlyView.h */,
-				A1FEA5111EA3B82500D6E5E5 /* DMHeartFlyView.m */,
 				A10C01201EA395F9008BDEB0 /* Main.storyboard */,
 				A10C01231EA395F9008BDEB0 /* Assets.xcassets */,
 				A10C01251EA395F9008BDEB0 /* LaunchScreen.storyboard */,
@@ -163,9 +163,9 @@
 			files = (
 				A10C011F1EA395F9008BDEB0 /* ViewController.m in Sources */,
 				A10C011C1EA395F9008BDEB0 /* AppDelegate.m in Sources */,
-				A1FEA5121EA3B82500D6E5E5 /* DMHeartFlyView.m in Sources */,
 				A1FEA5181EA4A27300D6E5E5 /* FlyFlowersView.m in Sources */,
 				A10C01191EA395F9008BDEB0 /* main.m in Sources */,
+				A1FEA51B1EA4DF4D00D6E5E5 /* TapLikeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
