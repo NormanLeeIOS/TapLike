@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) UIView *tapLikeBgView;
 @property (nonatomic, strong) UIImageView *tapLikeImageView;
+@property (nonatomic, strong) UILabel *countNumLaber;
+@property (nonatomic, assign) NSInteger countNumber;
 @property (nonatomic, strong) NSTimer *burstTimer;
 
 @end
@@ -30,8 +32,20 @@
     if (self) {
         [self initUI];
         [self addResponse];
+        _countNumber = 0;
+        [self refreshLabelNumber:_countNumber];
     }
     return self;
+}
+
+#pragma mark - public method
+
+- (void)setCountNumber:(NSInteger)countNumber
+{
+    if (_countNumber != countNumber) {
+        _countNumber = countNumber;
+        [self refreshLabelNumber:countNumber];
+    }
 }
 
 #pragma mark - Properties
@@ -41,7 +55,7 @@
     if (!_tapLikeImageView) {
         _tapLikeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zan_btn"]];
         [_tapLikeImageView setFrame:CGRectMake((self.frame.size.width - TapLikeWidth)/2.0,
-                                               (self.frame.size.height - TapLikeHeight)/2.0,
+                                               (self.frame.size.height - TapLikeHeight)/2.0 - 3.0f,
                                                TapLikeWidth,
                                                TapLikeHeight)];
         _tapLikeImageView.backgroundColor = [UIColor clearColor];
@@ -63,12 +77,27 @@
     return _tapLikeBgView;
 }
 
+- (UILabel *)countNumLaber
+{
+    if (!_countNumLaber) {
+        _countNumLaber = [[UILabel alloc] initWithFrame:CGRectMake(0,
+                                                                   CGRectGetMaxY(self.tapLikeImageView.frame)+3.0f,
+                                                                   self.frame.size.width,
+                                                                   9.0f)];
+        _countNumLaber.textColor = [UIColor colorWithRed:0xff/255.0 green:0xff/255.0 blue:0xff/255.0 alpha:1.0];
+        _countNumLaber.textAlignment = NSTextAlignmentCenter;
+        _countNumLaber.font = [UIFont systemFontOfSize:9.0f];
+    }
+    return _countNumLaber;
+}
+
 #pragma mark - initUI
 
 - (void)initUI
 {
     [self addSubview:self.tapLikeBgView];
     [self addSubview:self.tapLikeImageView];
+    [self addSubview:self.countNumLaber];
 }
 
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
@@ -99,6 +128,8 @@
     // 添加动画
     if (![self.tapLikeImageView.layer animationForKey:@"scale"]) {
         [self addTapLikeAnimation];
+//        self.countNumber = self.countNumber + 1;
+        [self refreshLabelNumber:self.countNumber++];
     }
     
     // 发起回调
@@ -146,6 +177,13 @@
     if ([anim isEqual:[self.tapLikeImageView.layer animationForKey:@"scale"]]) {
         [self.tapLikeImageView.layer removeAnimationForKey:@"scale"];
     }
+}
+
+#pragma mark - number change
+
+- (void)refreshLabelNumber:(long)number
+{
+    self.countNumLaber.text = [NSString stringWithFormat:@"%ld", number];
 }
 
 
