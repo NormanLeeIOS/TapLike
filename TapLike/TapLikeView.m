@@ -55,7 +55,7 @@
     if (!_tapLikeImageView) {
         _tapLikeImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"zan_btn"]];
         [_tapLikeImageView setFrame:CGRectMake((self.frame.size.width - TapLikeWidth)/2.0,
-                                               (self.frame.size.height - TapLikeHeight)/2.0 - 3.0f,
+                                               (self.frame.size.height - TapLikeHeight)/2.0 - 4.0f,
                                                TapLikeWidth,
                                                TapLikeHeight)];
         _tapLikeImageView.backgroundColor = [UIColor clearColor];
@@ -81,7 +81,7 @@
 {
     if (!_countNumLaber) {
         _countNumLaber = [[UILabel alloc] initWithFrame:CGRectMake(0,
-                                                                   CGRectGetMaxY(self.tapLikeImageView.frame)+3.0f,
+                                                                   CGRectGetMaxY(self.tapLikeImageView.frame)+4.0f,
                                                                    self.frame.size.width,
                                                                    9.0f)];
         _countNumLaber.textColor = [UIColor colorWithRed:0xff/255.0 green:0xff/255.0 blue:0xff/255.0 alpha:1.0];
@@ -128,8 +128,8 @@
     // 添加动画
     if (![self.tapLikeImageView.layer animationForKey:@"scale"]) {
         [self addTapLikeAnimation];
-//        self.countNumber = self.countNumber + 1;
-        [self refreshLabelNumber:self.countNumber++];
+        self.countNumber = self.countNumber + 1;
+        [self refreshLabelNumber:self.countNumber];
     }
     
     // 发起回调
